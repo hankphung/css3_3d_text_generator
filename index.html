@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head> 
+		<script>
+		function generate(){
+			STATIC_STYLE= " 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15)"
+			var color;
+			var r,b,b; 
+			r=document.getElementById('r').value
+			g=document.getElementById('g').value
+			b=document.getElementById('b').value
+			levels=[51,54,68,70,85]
+			dynamic=""; 
+			function decrease(r,g,b,n){
+			  function subtract(a,n){
+			    max= Math.max(0,a-n);
+			    if(max<10) max='0'+max
+			    return max
+			  }
+			  //return 'rgba('+subtract(r,n)+','+subtract(g,n)+','+subtract(b,n)+',0.5)'
+			  return '#'+d2h(subtract(r,n))+d2h(subtract(g,n))+d2h(subtract(b,n));
+			}
+			color= decrease(r,g,b,0) ;
+			for(i in levels)
+			{
+			  bottom=i;bottom++
+			  dynamic+= ("0 "+bottom+"px 0 "+  decrease(r,g,b,levels[i]) +', ');
+			}
+			head= document.getElementById('head');
+			   
+		    head.style.color= color;
+		    document.getElementById('result').value=head.style['text-shadow']=dynamic + STATIC_STYLE
+		     
+		}
+		function d2h(d) {return d.toString(16);}
+		function h2d(h) {return parseInt(h,16);} 
+		</script>	
+
+		<style>
+			h1{ 
+  				color: #fff; 
+				 font: bold 100px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;
+				 
+ 
+			}
+		</style>
+	</head>
+<body>
+	<div>
+		<input placeholder='R' id='r'>
+		<input placeholder='G' id='g'>
+		<input placeholder='B' id='b'>
+		<h1 id='head'>
+			your 3d title
+		</h1>
+		<button onclick="generate()">ChangeColor</button>
+		<textarea id="result" cols="50" rows="5">
+			
+		</textarea>
+	</div>
+</body>
+</html>
